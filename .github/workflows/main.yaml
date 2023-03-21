@@ -5,7 +5,7 @@ on:
     branches: [ main ]
 
 env:
-  COMMIT_ID: $(git rev-parse --short "$GITHUB_SHA")
+  COMMIT_ID: ${{ GITHUB_SHA::7 }}
 
 jobs:
   job_1:
