@@ -39,6 +39,7 @@ jobs:
           key: ${{ secrets.SSH_KEY }}
           username: ${{ secrets.SSH_USERNAME }} 
           port: 22
+          all_envs: true
           script: |
             cd /home/ubuntu/CICD/devops-labs-dotnet-backend 
             chmod +x script.sh
