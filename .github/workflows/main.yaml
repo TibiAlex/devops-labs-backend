@@ -22,10 +22,10 @@ jobs:
         run: docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD
 
       - name: build image
-        run: docker build . --file DevOps-Labs-Backend/Dockerfile --tag ${{ secrets.DOCKER_USERNAME }}/dotnet_backend_application:${COMMIT_ID:0:6}
+        run: docker build . --file DevOps-Labs-Backend/Dockerfile --tag ${{ secrets.DOCKER_USERNAME }}/dotnet_backend_application:${COMMIT_ID:0:7}
       
       - name: push to dockerhub
-        run: docker push ${{ secrets.DOCKER_USERNAME }}/dotnet_backend_application:${COMMIT_ID:0:6}
+        run: docker push ${{ secrets.DOCKER_USERNAME }}/dotnet_backend_application:${COMMIT_ID:0:7}
       
   job_2:
     name: deploy the image localy
@@ -41,6 +41,7 @@ jobs:
           port: 22
           script: |
             cd /home/ubuntu/CICD/devops-labs-dotnet-backend 
-            ./script.sh ${COMMIT_ID:0:6}
+            chmod +x script.sh
+            ./script.sh ${COMMIT_ID:0:7}
 
 
