@@ -4,6 +4,9 @@ on:
   push:
     branches: [ main ]
 
+env:
+  COMMIT_ID: $(git rev-parse --short "$GITHUB_SHA")
+
 jobs:
   job_1:
     name: build image and push to dockerhub
@@ -19,10 +22,10 @@ jobs:
         run: docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD
 
       - name: build image
-        run: docker build . --file DevOps-Labs-Backend/Dockerfile --tag ${{ secrets.DOCKER_USERNAME }}/dotnet_backend_application:$(git rev-parse --short "$GITHUB_SHA")
+        run: docker build . --file DevOps-Labs-Backend/Dockerfile --tag ${{ secrets.DOCKER_USERNAME }}/dotnet_backend_application:$COMMIT_ID
       
       - name: push to dockerhub
-        run: docker push ${{ secrets.DOCKER_USERNAME }}/dotnet_backend_application:$(git rev-parse --short "$GITHUB_SHA")
+        run: docker push ${{ secrets.DOCKER_USERNAME }}/dotnet_backend_application:$COMMIT_ID
       
   job_2:
     name: deploy the image localy
@@ -36,6 +39,6 @@ jobs:
           key: ${{ secrets.SSH_KEY }}
           username: ${{ secrets.SSH_USERNAME }} 
           port: 22
-          script: bash /home/ubuntu/CICD/devops-labs-dotnet-backend/script.sh $(git rev-parse --short "$GITHUB_SHA")
+          script: ./script.sh $COMMIT_ID
 
 
