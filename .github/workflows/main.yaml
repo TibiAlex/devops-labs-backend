@@ -26,15 +26,16 @@ jobs:
       
   job_2:
     name: deploy the image localy
+    needs: job_1
     runs-on: ubuntu-latest
     steps:
 
       - uses: appleboy/ssh-action@master
         with:
-          HOST: ${{ secrets.HOST }}
-          SSH_KEY: ${{ secrets.SSH_KEY }}
-          SSH_USERNAME: ${{ secrets.SSH_USERNAME }} 
+          host: ${{ secrets.HOST }}
+          key: ${{ secrets.SSH_KEY }}
+          username: ${{ secrets.SSH_USERNAME }} 
           port: 22
-          script: ls
+          script: ../../script.sh $(git rev-parse --short "$GITHUB_SHA")
 
 
