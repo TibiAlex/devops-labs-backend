@@ -23,4 +23,18 @@ jobs:
       
       - name: push to dockerhub
         run: docker push ${{ secrets.DOCKER_USERNAME }}/dotnet_backend_application:$(git rev-parse --short "$GITHUB_SHA")
+      
+  job_2:
+    name: deploy the image localy
+    runs-on: ubuntu-latest
+    steps:
+
+      - uses: appleboy/ssh-action@master
+        with:
+          HOST: ${{ secrets.HOST }}
+          SSH_KEY: ${{ secrets.SSH_KEY }}
+          SSH_USERNAME: ${{ secrets.SSH_USERNAME }} 
+          port: 22
+          script: ls
+
 
