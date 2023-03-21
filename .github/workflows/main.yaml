@@ -14,13 +14,13 @@ jobs:
 
       - name: docker login
         env:
-          DOCKER_USER: ${{secrets.DOCKER_USER}}
-          DOCKER_PASSWORD: ${{secrets.DOCKER_PASSWORD}}
+          DOCKER_USER: ${{ secrets.DOCKER_USER }}
+          DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
         run: docker login -u $DOCKER_USER -p $DOCKER_PASSWORD
 
       - name: build image
         run: docker build . --file DevOps-Labs-Backend/Dockerfile --tag dotnet_backend_application:$(git rev-parse --short "$GITHUB_SHA")
       
       - name: push to dockerhub
-        run: docker push ${{secrets.DOCKER_USER}}/dotnet_backend_application
+        run: docker push ${{ secrets.DOCKER_USER }}/dotnet_backend_application
 
