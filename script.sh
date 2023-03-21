@@ -1,7 +1,8 @@
 #!/bin/bash
 
+container_name=$(docker ps -a --format '{{.Names}}' | grep dotnet_backend_application)
 TAG=$(echo $1 | cut -c1-7)
-if docker ps -f "name=dotnet_backend_application" | grep -q dotnet_backend_application; then
+if [ "$container_name" = "dotnet_backend_application" ]; then
 	docker stop dotnet_backend_application
         docker rm dotnet_backend_application
 fi
