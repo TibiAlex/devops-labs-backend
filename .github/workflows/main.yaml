@@ -34,12 +34,16 @@ jobs:
     steps:
 
       - uses: appleboy/ssh-action@master
+        env:
+          DB_HOST: ${{ secrets.DB_HOST }}
+          DB_PASSWORD: ${{ secrets.DB_PASSWORD }}
+          DB_USERNAME: ${{ secrets.DB_USERNAME }}
         with:
           host: ${{ secrets.HOST }}
           key: ${{ secrets.SSH_KEY }}
           username: ${{ secrets.SSH_USERNAME }} 
           port: 22
-          envs: COMMIT_ID
+          envs: COMMIT_ID,DB_HOST,DB_PASSWORD,DB_USERNAME
           script: |
             cd /home/ubuntu/CICD/devops-labs-dotnet-backend 
             chmod +x script.sh
