@@ -63,7 +63,7 @@ jobs:
           for ip in "${ips[@]}"; do
             ip=$(echo "$ip" | sed 's/"//g')
             scp -i demo -o StrictHostKeyChecking=no -r script.sh ${{ secrets.AWS_HOST }}@$ip:/home/ec2-user/script.sh
-            ssh -i demo -o StrictHostKeyChecking=no ${{ secrets.AWS_HOST }}@$ip "chmod +x script.sh && ./script.sh $COMMIT_ID ${{ secrets.DB_HOST }} ${{ secrets.DB_PASSWORD }} ${{ secrets.DB_USERNAME }}"
+            ssh -i demo -o StrictHostKeyChecking=no ${{ secrets.AWS_HOST }}@$ip "chmod +x script.sh && ./script.sh $COMMIT_ID"
           done
 
 
