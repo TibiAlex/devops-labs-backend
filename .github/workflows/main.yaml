@@ -46,6 +46,7 @@ jobs:
           ips=$(./aws_script.sh)
           echo "$ips" > ips.txt
           cat ips.txt
+          ls
         shell: bash
 
       - name: Loop through IP addresses and create tasks
