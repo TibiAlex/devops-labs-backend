@@ -42,8 +42,8 @@ jobs:
       - name: Execute script and store output
         id: get-ips
         run: |
-          chmod +x ./script.sh
-          ips=$(./script.sh)
+          chmod +x aws_script.sh
+          ips=$(./aws_script.sh)
           echo "$ips" > ips.txt
           cat ips.txt
         shell: bash
