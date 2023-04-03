@@ -9,5 +9,5 @@ fi
 docker run -d --name dotnet_backend_application \
        	--network devopslabs \
 	-p 4000:4000  \
-	--env ConnectionStrings__MySQL="Server=$2;Port=3306;User=$4;Password=$3;Database=devops-labs" \
+	--env ConnectionStrings__MySQL="Server=$2;Port=3306;User=$4;Password=$3;Database=database-devschool" \
        	tibialex2000/dotnet_backend_application:$TAG
